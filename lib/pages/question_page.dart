@@ -26,9 +26,15 @@ class _QuestionPageState extends State<QuestionPage> {
 
     cardList = [
       DraggableCardWidget(
+        character: 'lib/assets/people/LGPD-Morena.svg',
         question: 'Escolha para a esquerda',
         correctOption: 3,
-        options: const {1: 'Topo', 2: 'Direita', 3: 'Baixo', 4: 'Esquerda'},
+        options: const {
+          1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          4: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        },
         scoreMap: const {
           1: {
             'sumLevel': true,
@@ -58,9 +64,15 @@ class _QuestionPageState extends State<QuestionPage> {
         onCardDone: updateList,
       ),
       DraggableCardWidget(
+        character: 'lib/assets/people/LGPD-Morena.svg',
         question: 'Escolha para a direita',
         correctOption: 3,
-        options: const {1: 'Topo', 2: 'Direita', 3: 'Baixo', 4: 'Esquerda'},
+        options: const {
+          1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          3: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+          4: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+        },
         scoreMap: const {
           1: {
             'sumLevel': true,

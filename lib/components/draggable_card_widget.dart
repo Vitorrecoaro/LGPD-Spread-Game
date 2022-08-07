@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DraggableCardWidget extends StatefulWidget {
   final Map<int, String> options;
@@ -9,6 +10,7 @@ class DraggableCardWidget extends StatefulWidget {
   final String question;
   final int correctOption;
   Function()? onCardDone;
+  final String character;
   DraggableCardWidget({
     Key? key,
     required this.options,
@@ -17,6 +19,7 @@ class DraggableCardWidget extends StatefulWidget {
     required this.question,
     this.isConcluded = false,
     this.onCardDone,
+    required this.character,
   }) : super(key: key);
 
   @override
@@ -100,7 +103,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
     });
   }
 
-  AlignmentGeometry textAlignment() {
+  AlignmentGeometry positionText() {
     if (currentOffset.x > 0) {
       return Alignment.centerRight;
     } else if (currentOffset.x < 0) {
@@ -111,6 +114,15 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
       return Alignment.bottomCenter;
     }
     return Alignment.center;
+  }
+
+  TextAlign textAlignment() {
+    if (currentOffset.x > 0) {
+      return TextAlign.right;
+    } else if (currentOffset.x < 0) {
+      return TextAlign.left;
+    }
+    return TextAlign.center;
   }
 
   AlignmentGeometry gradientBeginAlignment() {
@@ -152,7 +164,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
         height: sizeCard,
         decoration: BoxDecoration(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
-          color: const Color(0xff95A658),
+          color: Theme.of(context).colorScheme.surface,
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.50),
@@ -166,34 +178,45 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
           Quaternion.axisAngle(Vector3(0, 0, 1), currentZAngleOffset),
           Vector3(1, 1, 1),
         ),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            gradient: LinearGradient(
-              begin: gradientBeginAlignment(),
-              end: gradientEndAlignment(),
-              colors: [
-                Colors.black.withOpacity(
-                    (5 * currentOffset.length / sizeCard) < 0.75
-                        ? (5 * currentOffset.length / sizeCard)
-                        : 0.75),
-                Colors.black.withOpacity(0)
-              ],
+        child: Stack(
+          children: [
+            SvgPicture.asset(
+              widget.character,
+              height: sizeCard,
+              alignment: Alignment.center,
             ),
-          ),
-          child: Align(
-              child: Text(
-                showOption()!,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: (currentOffset + currentOffset).length == 0
-                      ? Colors.transparent
-                      : Colors.white.withOpacity(currentOffset.length / 20 <= 1
-                          ? (currentOffset.length) / 50
-                          : 1),
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                gradient: LinearGradient(
+                  begin: gradientBeginAlignment(),
+                  end: gradientEndAlignment(),
+                  colors: [
+                    Colors.black.withOpacity(
+                        (5 * currentOffset.length / sizeCard) < 0.75
+                            ? (5 * currentOffset.length / sizeCard)
+                            : 0.75),
+                    Colors.black.withOpacity(0)
+                  ],
                 ),
               ),
-              alignment: textAlignment()),
+              child: Align(
+                  child: Text(
+                    showOption()!,
+                    textAlign: textAlignment(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: (currentOffset + currentOffset).length == 0
+                          ? Colors.transparent
+                          : Colors.white.withOpacity(
+                              currentOffset.length / 20 <= 1
+                                  ? (currentOffset.length) / 50
+                                  : 1),
+                    ),
+                  ),
+                  alignment: positionText()),
+            ),
+          ],
         ),
       ),
     );
