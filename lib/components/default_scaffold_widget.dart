@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DefaultScaffoldWidget extends StatefulWidget {
   final Widget body;
@@ -16,11 +17,26 @@ class _DefaultScaffoldWidgetState extends State<DefaultScaffoldWidget> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).colorScheme.secondary,
-        onPressed: () {},
-        child: const Icon(Icons.map, size: 46),
-        elevation: 2.0,
+      floatingActionButton: SizedBox(
+        height: sizeH * 0.10,
+        width: sizeH * 0.10,
+        child: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          onPressed: () {},
+          child: Stack(
+            children: [
+              Transform.translate(
+                offset: const Offset(2, 2),
+                child: SvgPicture.asset(
+                  'lib/assets/UI/VectorMapButton.svg',
+                  color: Colors.black38,
+                ),
+              ),
+              SvgPicture.asset('lib/assets/UI/VectorMapButton.svg'),
+            ],
+          ),
+          elevation: 4,
+        ),
       ),
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
@@ -32,27 +48,30 @@ class _DefaultScaffoldWidgetState extends State<DefaultScaffoldWidget> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10, bottom: 10),
-                child: Icon(
-                  Icons.person,
-                  size: sizeH * 0.05,
-                ),
-              ),
+            Container(
+              height: sizeH * 0.075,
             ),
-            const Spacer(),
-            Expanded(
-              flex: 2,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Icon(
-                  Icons.settings,
-                  size: sizeH * 0.05,
-                ),
-              ),
-            )
+            // Expanded(
+            //   flex: 2,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top: 10, bottom: 10),
+            //     child: Icon(
+            //       Icons.person,
+            //       size: sizeH * 0.05,
+            //     ),
+            //   ),
+            // ),
+            // const Spacer(),
+            // Expanded(
+            //   flex: 2,
+            //   child: Padding(
+            //     padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+            //     child: Icon(
+            //       Icons.settings,
+            //       size: sizeH * 0.05,
+            //     ),
+            //   ),
+            // )
           ],
         ),
       ),

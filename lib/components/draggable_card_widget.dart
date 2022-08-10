@@ -9,8 +9,8 @@ class DraggableCardWidget extends StatefulWidget {
   bool isConcluded;
   final String question;
   final int correctOption;
-  Function()? onCardDone;
   final String character;
+  int answer;
   DraggableCardWidget({
     Key? key,
     required this.options,
@@ -18,8 +18,8 @@ class DraggableCardWidget extends StatefulWidget {
     required this.correctOption,
     required this.question,
     this.isConcluded = false,
-    this.onCardDone,
     required this.character,
+    this.answer = -1,
   }) : super(key: key);
 
   @override
@@ -41,6 +41,8 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   // - 4, for left;
   int optionSelected = 0;
 
+  double limitForMoving = 35;
+
   String? showOption() {
     if (currentOffset.x > 0) {
       return widget.options[2];
@@ -57,44 +59,42 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   updateConcluded(int option) {
     if (option > 0 && option <= 4) {
       widget.isConcluded != widget.isConcluded;
-      widget.onCardDone!();
+      widget.answer = option;
     }
   }
 
   void updateContainer(DragUpdateDetails details) {
-    double limitForMoving = 35;
-    setState(() {
-      if (optionSelected == 0) {
-        currentOffset.add(Vector3(details.delta.dx, details.delta.dy, 0));
-        if (details.delta.dx > 0) {
-          currentZAngleOffset += details.delta.distance * pi / 360;
-        } else if (details.delta.dx < 0) {
-          currentZAngleOffset -= details.delta.distance * pi / 360;
+    currentOffset.add(Vector3(details.delta.dx, details.delta.dy, 0));
+    if ((currentOffset.length).abs() < limitForMoving) {
+      setState(() {
+        if (optionSelected == 0) {
+          if (details.delta.dx > 0) {
+            currentZAngleOffset += details.delta.distance * pi / 360;
+          } else if (details.delta.dx < 0) {
+            currentZAngleOffset -= details.delta.distance * pi / 360;
+          }
         }
-        if (currentOffset.length.abs() > limitForMoving) {
-          selectOption();
-        }
-      }
-    });
-  }
-
-  selectOption() {
-    double limitForMoving = 35;
-    if (currentOffset.length.abs() > limitForMoving) {
-      if (currentOffset.y < -(limitForMoving + 10)) {
-        optionSelected = 1;
-      } else if (currentOffset.x > limitForMoving) {
-        optionSelected = 2;
-      } else if (currentOffset.y > (limitForMoving + 10)) {
-        optionSelected = 3;
-      } else if (currentOffset.x < -limitForMoving) {
-        optionSelected = 4;
-      }
-      updateConcluded(optionSelected);
+      });
     }
   }
 
+  selectOption() {
+    if (currentOffset.y <= -limitForMoving) {
+      optionSelected = 1;
+    } else if (currentOffset.x >= limitForMoving) {
+      optionSelected = 2;
+    } else if (currentOffset.y >= limitForMoving) {
+      optionSelected = 3;
+    } else if (currentOffset.x <= -limitForMoving) {
+      optionSelected = 4;
+    }
+    updateConcluded(optionSelected);
+  }
+
   void resetContainer(details) {
+    if (currentOffset.length.abs() >= limitForMoving) {
+      selectOption();
+    }
     setState(() {
       currentOffset = Vector3.zero();
       currentOffset = Vector3.zero();
@@ -205,7 +205,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
                     showOption()!,
                     textAlign: textAlignment(),
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 20,
                       color: (currentOffset + currentOffset).length == 0
                           ? Colors.transparent
                           : Colors.white.withOpacity(

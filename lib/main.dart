@@ -1,14 +1,18 @@
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:lgpd_spread_game/common/tutorial_cards.dart';
 import 'package:lgpd_spread_game/pages/question_page.dart';
 import 'package:lgpd_spread_game/pages/start_page.dart';
+import 'common/list_cards_class.dart';
+import 'common/tutorial_cards.dart';
 
 void main() {
   runApp(
     MaterialApp(
       routes: {
         '/homePage': (BuildContext context) => StartPage(),
-        '/questionPage': ((context) => const QuestionPage()),
+        '/tutorialPage': ((context) => QuestionPage(
+              list: ListCards(listTutorialCards),
+            )),
       },
       theme: ThemeData(
           colorScheme: const ColorScheme(

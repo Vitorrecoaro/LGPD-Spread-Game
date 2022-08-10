@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
 
-  TextEditingController nameController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class StartPage extends StatelessWidget {
 
     validateName() {
       if (nameController.value.text != '') {
-        Navigator.pushReplacementNamed(context, '/questionPage');
+        Navigator.pushReplacementNamed(context, '/tutorialPage');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: const Text(
@@ -73,30 +73,41 @@ class StartPage extends StatelessWidget {
                       backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).colorScheme.surface)),
                   onPressed: validateName,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0),
-                        child: SvgPicture.asset(
-                            'lib/assets/UI/VectorMapButton.svg'),
-                      ),
-                      const Spacer(),
-                      Flexible(
-                        flex: 5,
-                        child: Text(
-                          'Novo jogo',
-                          style: TextStyle(
-                              fontSize: 18,
-                              color:
-                                  Theme.of(context).colorScheme.onBackground),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          children: [
+                            Transform.translate(
+                              offset: const Offset(2, 2),
+                              child: SvgPicture.asset(
+                                'lib/assets/UI/VectorMapButton.svg',
+                                color: Colors.black38,
+                              ),
+                            ),
+                            SvgPicture.asset(
+                                'lib/assets/UI/VectorMapButton.svg'),
+                          ],
                         ),
-                      ),
-                    ],
+                        const Spacer(),
+                        Flexible(
+                          flex: 5,
+                          child: Text(
+                            'Novo jogo',
+                            style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    Theme.of(context).colorScheme.onBackground),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
+            )
           ],
         ),
       ),

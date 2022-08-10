@@ -1,23 +1,9 @@
-<svg width="38" height="46" viewBox="0 0 38 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_d_26_6)">
-<path d="M24.9552 38L20.1012 29.633H29.8595L24.9552 38Z" fill="#DAD3C7"/>
-<path d="M8.14049 38L4.5 35.9083L4.5 31.7248L8.14049 29.633L11.781 31.7248L11.781 35.9083L8.14049 38Z" fill="#DAD3C7"/>
-<path d="M13.0448 0L17.8988 8.36697H8.14049L13.0448 0Z" fill="#DAD3C7"/>
-<path d="M29.8595 0L33.5 2.09174V6.27523L29.8595 8.36697L26.219 6.27523V2.09174L29.8595 0Z" fill="#DAD3C7"/>
-<path d="M13.0448 0H29.8595V8.36697H13.0448V0Z" fill="#DAD3C7"/>
-<path d="M24.9552 38H8.14049L8.14049 29.633H24.9552V38Z" fill="#DAD3C7"/>
-<path d="M8.14049 8.36697H29.8595V29.633H8.14049L8.14049 8.36697Z" fill="#DAD3C7"/>
-</g>
-<defs>
-<filter id="filter0_d_26_6" x="0.5" y="0" width="37" height="46" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-<feOffset dy="4"/>
-<feGaussianBlur stdDeviation="2"/>
-<feComposite in2="hardAlpha" operator="out"/>
-<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
-<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_26_6"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_26_6" result="shape"/>
-</filter>
-</defs>
+<svg width="35" height="46" viewBox="0 0 35 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M24.6873 46L18.8291 35.8716H30.6063L24.6873 46Z" fill="#DAD3C7"/>
+<path d="M4.3937 46L0 43.4679L4.43531e-07 38.4037L4.3937 35.8716L8.7874 38.4037L8.7874 43.4679L4.3937 46Z" fill="#DAD3C7"/>
+<path d="M10.3127 0L16.1709 10.1284H4.3937L10.3127 0Z" fill="#DAD3C7"/>
+<path d="M30.6063 0L35 2.53211V7.59633L30.6063 10.1284L26.2126 7.59633V2.53211L30.6063 0Z" fill="#DAD3C7"/>
+<path d="M10.3127 0H30.6063V10.1284H10.3127V0Z" fill="#DAD3C7"/>
+<path d="M24.6873 46H4.3937L4.3937 35.8716H24.6873V46Z" fill="#DAD3C7"/>
+<path d="M4.3937 10.1284H30.6063V35.8716H4.3937L4.3937 10.1284Z" fill="#DAD3C7"/>
 </svg>
