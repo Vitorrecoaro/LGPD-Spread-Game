@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lgpd_spread_game/common/tutorial_cards.dart';
+import 'package:lgpd_spread_game/getX/game_controller.dart';
 import 'package:lgpd_spread_game/pages/question_page.dart';
 import 'package:lgpd_spread_game/pages/start_page.dart';
-import 'common/list_cards_class.dart';
 import 'common/tutorial_cards.dart';
 
 void main() {
+  final gameController = Get.put(GameController());
   runApp(
     MaterialApp(
       routes: {
         '/homePage': (BuildContext context) => StartPage(),
-        '/tutorialPage': ((context) => QuestionPage(
-              list: ListCards(listTutorialCards),
-            )),
+        '/tutorialPage': ((context) {
+          gameController.actualCards = listTutorialCards;
+          return const QuestionPage();
+        }),
       },
       theme: ThemeData(
           colorScheme: const ColorScheme(

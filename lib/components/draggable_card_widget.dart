@@ -1,25 +1,24 @@
 import 'package:flame/components.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:lgpd_spread_game/getX/game_controller.dart';
 
 class DraggableCardWidget extends StatefulWidget {
   final Map<int, String> options;
   final Map<int, dynamic> scoreMap;
-  bool isConcluded;
   final String question;
   final int correctOption;
   final String character;
-  int answer;
-  DraggableCardWidget({
+  const DraggableCardWidget({
     Key? key,
     required this.options,
     required this.scoreMap,
     required this.correctOption,
     required this.question,
-    this.isConcluded = false,
     required this.character,
-    this.answer = -1,
   }) : super(key: key);
 
   @override
@@ -27,6 +26,8 @@ class DraggableCardWidget extends StatefulWidget {
 }
 
 class _DraggableCardWidgetState extends State<DraggableCardWidget> {
+  final GameController ctr = Get.find();
+
   // Variable for moving.
   Vector3 currentOffset = Vector3.zero();
 
@@ -58,8 +59,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
 
   updateConcluded(int option) {
     if (option > 0 && option <= 4) {
-      widget.isConcluded != widget.isConcluded;
-      widget.answer = option;
+      ctr.updateCardList(option);
     }
   }
 
@@ -155,6 +155,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   Widget build(BuildContext context) {
     double sizeCard = MediaQuery.of(context).size.width * 0.7;
     return GestureDetector(
+      dragStartBehavior: DragStartBehavior.down,
       onVerticalDragUpdate: updateContainer,
       onVerticalDragEnd: resetContainer,
       onHorizontalDragUpdate: updateContainer,

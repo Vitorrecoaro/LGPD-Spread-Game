@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:lgpd_spread_game/getX/game_controller.dart';
 
 class StartPage extends StatelessWidget {
   StartPage({Key? key}) : super(key: key);
 
   final TextEditingController nameController = TextEditingController();
+
+  final GameController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +16,7 @@ class StartPage extends StatelessWidget {
 
     validateName() {
       if (nameController.value.text != '') {
+        controller.setUser(nameController.text);
         Navigator.pushReplacementNamed(context, '/tutorialPage');
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
