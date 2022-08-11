@@ -36,9 +36,6 @@ dependencies:
   flame: ^1.1.1
   flutter_svg: ^1.0.3
   animated_text_kit: ^4.2.1
-  flutter_redux: ^0.10.0
-  redux: ^5.0.0
-  flutter_redux_dev_tools: ^0.5.2
 
 dev_dependencies:
   flutter_test:
