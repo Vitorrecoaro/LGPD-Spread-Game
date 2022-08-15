@@ -1,9 +1,9 @@
 name: lgpd_spread_game
-description: A new Flutter project.
+description: Quer saber um pouco mais sobre a LGPD? Então mergulhe neste mundo!
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "FDSBC - Turma 54" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -37,12 +37,18 @@ dependencies:
   flutter_svg: ^1.0.3
   animated_text_kit: ^4.2.1
   get: ^4.6.5
+  flutter_launcher_icons: ^0.10.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
   mocktail: ^0.3.0
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/UI/LGPD-Spread_game-logo.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -59,6 +65,9 @@ flutter:
     - lib/assets/people/LGPD-Morena.svg
     - lib/assets/people/LGPD-Ruiva.svg
     - lib/assets/UI/VectorMapButton.svg
+    - lib/assets/UI/LGPD_Spread_Game-Logo.svg
+    - lib/assets/UI/library_background.jpg
+    - lib/assets/UI/Option.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

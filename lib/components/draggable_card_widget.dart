@@ -12,13 +12,19 @@ class DraggableCardWidget extends StatefulWidget {
   final String question;
   final int correctOption;
   final String character;
-  const DraggableCardWidget({
+  bool isDraggable = true;
+  bool actionShowMap;
+  bool actionShowProgress;
+  DraggableCardWidget({
     Key? key,
     required this.options,
     required this.scoreMap,
     required this.correctOption,
     required this.question,
     required this.character,
+    this.isDraggable = true,
+    this.actionShowMap = false,
+    this.actionShowProgress = false,
   }) : super(key: key);
 
   @override
@@ -42,7 +48,7 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   // - 4, for left;
   int optionSelected = 0;
 
-  double limitForMoving = 35;
+  double limitForMoving = 25;
 
   String? showOption() {
     if (currentOffset.x > 0) {
@@ -154,72 +160,133 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   @override
   Widget build(BuildContext context) {
     double sizeCard = MediaQuery.of(context).size.width * 0.7;
-    return GestureDetector(
-      dragStartBehavior: DragStartBehavior.down,
-      onVerticalDragUpdate: updateContainer,
-      onVerticalDragEnd: resetContainer,
-      onHorizontalDragUpdate: updateContainer,
-      onHorizontalDragEnd: resetContainer,
-      child: Container(
-        width: sizeCard,
-        height: sizeCard,
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.all(Radius.circular(20)),
-          color: Theme.of(context).colorScheme.surface,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.50),
-                blurRadius: 4,
-                offset: const Offset(0, 4))
-          ],
-        ),
-        transformAlignment: AlignmentDirectional.bottomCenter,
-        transform: Matrix4.compose(
-          (currentOffset.x).abs() > 0 ? currentOffset : currentOffset,
-          Quaternion.axisAngle(Vector3(0, 0, 1), currentZAngleOffset),
-          Vector3(1, 1, 1),
-        ),
-        child: Stack(
-          children: [
-            SvgPicture.asset(
-              widget.character,
+    return widget.isDraggable
+        ? GestureDetector(
+            dragStartBehavior: DragStartBehavior.down,
+            onVerticalDragUpdate: updateContainer,
+            onVerticalDragEnd: resetContainer,
+            onHorizontalDragUpdate: updateContainer,
+            onHorizontalDragEnd: resetContainer,
+            child: Container(
+              width: sizeCard,
               height: sizeCard,
-              alignment: Alignment.center,
-            ),
-            Container(
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
-                gradient: LinearGradient(
-                  begin: gradientBeginAlignment(),
-                  end: gradientEndAlignment(),
-                  colors: [
-                    Colors.black.withOpacity(
-                        (5 * currentOffset.length / sizeCard) < 0.75
-                            ? (5 * currentOffset.length / sizeCard)
-                            : 0.75),
-                    Colors.black.withOpacity(0)
-                  ],
-                ),
+                color: Theme.of(context).colorScheme.surface,
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.black.withOpacity(0.50),
+                      blurRadius: 4,
+                      offset: const Offset(0, 4))
+                ],
               ),
-              child: Align(
-                  child: Text(
-                    showOption()!,
-                    textAlign: textAlignment(),
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: (currentOffset + currentOffset).length == 0
-                          ? Colors.transparent
-                          : Colors.white.withOpacity(
-                              currentOffset.length / 20 <= 1
-                                  ? (currentOffset.length) / 50
-                                  : 1),
+              transformAlignment: AlignmentDirectional.bottomCenter,
+              transform: Matrix4.compose(
+                (currentOffset.x).abs() > 0 ? currentOffset : currentOffset,
+                Quaternion.axisAngle(Vector3(0, 0, 1), currentZAngleOffset),
+                Vector3(1, 1, 1),
+              ),
+              child: Stack(
+                children: [
+                  SvgPicture.asset(
+                    widget.character,
+                    height: sizeCard,
+                    alignment: Alignment.center,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      gradient: LinearGradient(
+                        begin: gradientBeginAlignment(),
+                        end: gradientEndAlignment(),
+                        colors: [
+                          Colors.black.withOpacity(
+                              (5 * currentOffset.length / sizeCard) < 0.75
+                                  ? (5 * currentOffset.length / sizeCard)
+                                  : 0.75),
+                          Colors.black.withOpacity(0)
+                        ],
+                      ),
+                    ),
+                    child: Align(
+                        child: Text(
+                          showOption()!,
+                          textAlign: textAlignment(),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: (currentOffset + currentOffset).length == 0
+                                ? Colors.transparent
+                                : Colors.white.withOpacity(
+                                    currentOffset.length / 20 <= 1
+                                        ? (currentOffset.length) / 50
+                                        : 1),
+                          ),
+                        ),
+                        alignment: positionText()),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : Container(
+            width: sizeCard,
+            height: sizeCard,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(20)),
+              color: Theme.of(context).colorScheme.surface,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.black.withOpacity(0.50),
+                    blurRadius: 4,
+                    offset: const Offset(0, 4))
+              ],
+            ),
+            transformAlignment: AlignmentDirectional.bottomCenter,
+            transform: Matrix4.compose(
+              (currentOffset.x).abs() > 0 ? currentOffset : currentOffset,
+              Quaternion.axisAngle(Vector3(0, 0, 1), currentZAngleOffset),
+              Vector3(1, 1, 1),
+            ),
+            child: Stack(
+              children: [
+                SvgPicture.asset(
+                  widget.character,
+                  height: sizeCard,
+                  alignment: Alignment.center,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    gradient: LinearGradient(
+                      begin: gradientBeginAlignment(),
+                      end: gradientEndAlignment(),
+                      colors: [
+                        Colors.black.withOpacity(
+                            (5 * currentOffset.length / sizeCard) < 0.75
+                                ? (5 * currentOffset.length / sizeCard)
+                                : 0.75),
+                        Colors.black.withOpacity(0)
+                      ],
                     ),
                   ),
-                  alignment: positionText()),
+                  child: Align(
+                      child: Text(
+                        showOption()!,
+                        textAlign: textAlignment(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: (currentOffset + currentOffset).length == 0
+                              ? Colors.transparent
+                              : Colors.white.withOpacity(
+                                  currentOffset.length / 20 <= 1
+                                      ? (currentOffset.length) / 50
+                                      : 1),
+                        ),
+                      ),
+                      alignment: positionText()),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }

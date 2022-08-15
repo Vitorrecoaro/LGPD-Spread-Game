@@ -36,19 +36,24 @@ class StartPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.primary,
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Boas vindas, vossa excelência!',
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SvgPicture.asset(
+            'lib/assets/UI/LGPD_Spread_Game-Logo.svg',
+            width: sizeW * 0.75,
+            fit: BoxFit.fitHeight,
+          ),
+          const Padding(
+            padding: EdgeInsets.fromLTRB(16, 8, 16, 8),
+            child: Text(
+              'Boas vindas, vossa excelência!',
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
-            Material(
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+            child: Material(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               elevation: 4,
               child: TextField(
@@ -68,53 +73,52 @@ class StartPage extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SizedBox(
-                width: sizeW * 0.50,
-                child: ElevatedButton(
-                  style: ButtonStyle(
-                      elevation: MaterialStateProperty.all(4),
-                      backgroundColor: MaterialStateProperty.all(
-                          Theme.of(context).colorScheme.surface)),
-                  onPressed: validateName,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Stack(
-                          children: [
-                            Transform.translate(
-                              offset: const Offset(2, 2),
-                              child: SvgPicture.asset(
-                                'lib/assets/UI/VectorMapButton.svg',
-                                color: Colors.black38,
-                              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: SizedBox(
+              width: sizeW * 0.50,
+              child: ElevatedButton(
+                style: ButtonStyle(
+                    elevation: MaterialStateProperty.all(4),
+                    backgroundColor: MaterialStateProperty.all(
+                        Theme.of(context).colorScheme.surface)),
+                onPressed: validateName,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Transform.translate(
+                            offset: const Offset(2, 2),
+                            child: SvgPicture.asset(
+                              'lib/assets/UI/VectorMapButton.svg',
+                              color: Colors.black38,
                             ),
-                            SvgPicture.asset(
-                                'lib/assets/UI/VectorMapButton.svg'),
-                          ],
-                        ),
-                        const Spacer(),
-                        Flexible(
-                          flex: 5,
-                          child: Text(
-                            'Novo jogo',
-                            style: TextStyle(
-                                fontSize: 18,
-                                color:
-                                    Theme.of(context).colorScheme.onBackground),
                           ),
+                          SvgPicture.asset('lib/assets/UI/VectorMapButton.svg'),
+                        ],
+                      ),
+                      const Spacer(),
+                      Flexible(
+                        flex: 5,
+                        child: Text(
+                          'Novo jogo',
+                          style: TextStyle(
+                              fontSize: 18,
+                              color:
+                                  Theme.of(context).colorScheme.onBackground),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

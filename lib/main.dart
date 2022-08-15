@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lgpd_spread_game/common/cards.dart';
 import 'package:lgpd_spread_game/common/tutorial_cards.dart';
 import 'package:lgpd_spread_game/getX/game_controller.dart';
+import 'package:lgpd_spread_game/pages/library_page.dart';
 import 'package:lgpd_spread_game/pages/question_page.dart';
 import 'package:lgpd_spread_game/pages/start_page.dart';
 import 'common/tutorial_cards.dart';
@@ -14,8 +16,18 @@ void main() {
         '/homePage': (BuildContext context) => StartPage(),
         '/tutorialPage': ((context) {
           gameController.actualCards = listTutorialCards;
+          gameController.cassandraCards = initialCardsCassandra;
+          gameController.libraryCards = initialCardsRomana;
           return const QuestionPage();
         }),
+        '/cassandraHome': ((context) {
+          gameController.changeLocation('Cassandra');
+          return const QuestionPage();
+        }),
+        '/library': ((context) {
+          return LibraryPage();
+        }),
+        '/questionPage': ((context) => const QuestionPage())
       },
       theme: ThemeData(
           colorScheme: const ColorScheme(
