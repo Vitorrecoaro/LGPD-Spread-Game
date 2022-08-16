@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lgpd_spread_game/components/default_scaffold_widget.dart';
+import 'package:lgpd_spread_game/components/draggable_card_widget.dart';
 import '../getX/game_controller.dart';
 
 class QuestionPage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _QuestionPageState extends State<QuestionPage> {
                           child: Text(
                             ctr.actualCards.isEmpty
                                 ? 'Não há ninguém por aqui'
-                                : ctr.actualCards.last.question,
+                                : ctr.actualCards.values.last.question,
                             style: const TextStyle(fontSize: 24),
                             textAlign: TextAlign.justify,
                           ),
@@ -68,7 +69,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                     ],
                                   ),
                                 ),
-                                ctr.actualCards.last
+                                ctr.actualCards.values.last
                               ],
                             ),
                           ),

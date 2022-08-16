@@ -1,7 +1,7 @@
 import 'package:lgpd_spread_game/components/draggable_card_widget.dart';
 
-List<DraggableCardWidget> initialCardsCassandra = [
-  DraggableCardWidget(
+Map<int, DraggableCardWidget> initialCardsCassandra = {
+  1: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question: 'Quais seriam as hipóteses de Dados Pessoais Sensíveis: ',
     correctOption: 2,
@@ -13,7 +13,7 @@ List<DraggableCardWidget> initialCardsCassandra = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  2: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'O titular dos dados pessoais se indaga sobre os direitos que tem sobre seus dados, especificamente ao que pode obter através do controlador a qualquer momento e mediante requisição, onde cabe ao controlador fornecer as seguintes disposições, exceto:',
@@ -26,7 +26,7 @@ List<DraggableCardWidget> initialCardsCassandra = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  3: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'O tratamento de dados pessoais somente poderá ser realizado nas seguintes hipóteses, exceto:',
@@ -39,7 +39,7 @@ List<DraggableCardWidget> initialCardsCassandra = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  4: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'Certo Operador buscando sanar dúvidas em relação ao uso dos dados em poder da empresa em que trabalha busca então o Controlador e lhe pergunta se sua percepção sobre os princípios da LGPD está correta. O que apresenta a contrariedade em relação aos princípios previstos Lei Geral de Proteção de Dados (LGPD).',
@@ -52,7 +52,7 @@ List<DraggableCardWidget> initialCardsCassandra = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  5: DraggableCardWidget(
       character: 'lib/assets/people/LGPD-Morena.svg',
       question:
           'Um de seus funcionários que trabalha em um de seus negócios que é um parque de diversões infantil desses de shopping onde os pais deixam os filhos e buscam posteriormente, traz a seguinte questão: Poderia a empresa coletar o nome, idade e telefone com uma criança no qual está no parque para se cadastrar em um jogo online novo a ser implementado no parque e que também garante juntamente o cadastro a um sistema de descontos de uma loja de brinquedos parceira do parque?',
@@ -64,10 +64,10 @@ List<DraggableCardWidget> initialCardsCassandra = [
         4: 'Na situação mencionada o consentimento dado pelos pais é indispensável e não necessita ser verificado pelo controlador por meio de esforços razoáveis para verificar sua veracidade, consideradas as tecnologias disponíveis.'
       },
       scoreMap: const {}),
-];
+};
 
-List<DraggableCardWidget> initialCardsRomana = [
-  DraggableCardWidget(
+Map<int, DraggableCardWidget> initialCardsRomana = {
+  6: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Ruiva.svg',
     question:
         'O controlador deverá indicar encarregado pelo tratamento de dados pessoais, no qual fica encarregado das seguintes funções:',
@@ -80,7 +80,7 @@ List<DraggableCardWidget> initialCardsRomana = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  7: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Ruiva.svg',
     question:
         'Os dados pessoais serão eliminados após o término de seu tratamento, autorizada sua conservação, exceto para:',
@@ -93,7 +93,7 @@ List<DraggableCardWidget> initialCardsRomana = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  8: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Ruiva.svg',
     question:
         'O titular dos dados pessoais tem direito a obter do controlador, em relação aos dados do titular por ele tratados, a qualquer momento e mediante requisição as seguintes informações exceto:',
@@ -106,7 +106,7 @@ List<DraggableCardWidget> initialCardsRomana = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  9: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Ruiva.svg',
     question: 'Quem pode ser e quais as funções do controlador?',
     correctOption: 2,
@@ -118,7 +118,7 @@ List<DraggableCardWidget> initialCardsRomana = [
     },
     scoreMap: const {},
   ),
-  DraggableCardWidget(
+  10: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Ruiva.svg',
     question: 'O que são dados anonimizados?',
     correctOption: 1,
@@ -130,7 +130,7 @@ List<DraggableCardWidget> initialCardsRomana = [
     },
     scoreMap: const {},
   ),
-];
+};
 
 DraggableCardWidget welcomeCassandra = DraggableCardWidget(
   character: 'lib/assets/people/LGPD-Morena.svg',
@@ -159,3 +159,8 @@ DraggableCardWidget welcomeRomana = DraggableCardWidget(
   },
   scoreMap: const {},
 );
+
+Map<int, DraggableCardWidget> allCards = {
+  ...initialCardsCassandra,
+  ...initialCardsRomana
+};

@@ -6,10 +6,10 @@ import 'package:lgpd_spread_game/components/draggable_card_widget.dart';
 class GameController extends GetxController {
   String player = '';
   String location = 'Tutorial';
-  List<DraggableCardWidget> actualCards = [];
-  List<DraggableCardWidget> correctCards = [];
-  List<DraggableCardWidget> cassandraCards = [];
-  List<DraggableCardWidget> libraryCards = [];
+  Map<int, DraggableCardWidget> actualCards = {};
+  Map<int, DraggableCardWidget> correctCards = {};
+  Map<int, DraggableCardWidget> cassandraCards = {};
+  Map<int, DraggableCardWidget> libraryCards = {};
   int lastAnswer = -1;
   int lastCorrectAnswer = -1;
   double progress = 0;
@@ -17,27 +17,33 @@ class GameController extends GetxController {
   bool showMap = false;
 
   void changeLocation(String loc) {
+    actualCards.remove(99);
     if (loc != location && actualCards.length <= 1) {
+      actualCards.remove(-1);
       switch (loc) {
         case ('Cassandra'):
           if (cassandraCards.length >= 3) {
-            actualCards = List.from(cassandraCards.sublist(0, 3));
-            cassandraCards.removeRange(0, 2);
+            for (var key in List.from(cassandraCards.keys).sublist(0, 3)) {
+              actualCards[key] = cassandraCards[key]!;
+              cassandraCards.remove(key);
+            }
           } else {
-            actualCards = List.from(cassandraCards);
-            cassandraCards = [];
+            actualCards.addEntries(cassandraCards.entries);
+            cassandraCards = {};
           }
-          actualCards.add(welcomeCassandra);
+          actualCards[99] = (welcomeCassandra);
           break;
         case ('Library'):
           if (libraryCards.length >= 3) {
-            actualCards = List.from(libraryCards.sublist(0, 3));
-            libraryCards.removeRange(0, 2);
+            for (var key in List.from(libraryCards.keys).sublist(0, 3)) {
+              actualCards[key] = libraryCards[key]!;
+              libraryCards.remove(key);
+            }
           } else {
-            actualCards = List.from(libraryCards);
-            libraryCards = [];
+            actualCards.addEntries(libraryCards.entries);
+            libraryCards = {};
           }
-          actualCards.add(welcomeRomana);
+          actualCards[99] = (welcomeRomana);
           break;
       }
       location = loc;
@@ -49,49 +55,45 @@ class GameController extends GetxController {
     update();
   }
 
-  void setCardList(List<DraggableCardWidget> cards) {
+  void setCardList(Map<int, DraggableCardWidget> cards) {
     actualCards = cards;
     update();
   }
 
   void updateCardList(int answer) {
-    lastCorrectAnswer = actualCards.last.correctOption;
+    lastCorrectAnswer = actualCards.values.last.correctOption;
     lastAnswer = answer;
 
-    if (actualCards.last.actionShowMap) {
+    if (actualCards.values.last.actionShowMap) {
       showMap = true;
     }
-    if (actualCards.last.actionShowProgress) {
+    if (actualCards.values.last.actionShowProgress) {
       showProgress = true;
     }
 
     // Score for player if is correct.
-    if (lastAnswer == actualCards.last.correctOption) {
-      progress += 0.05;
-      correctCards.add(actualCards.removeLast());
-    } else {
+    if (lastAnswer == actualCards.values.last.correctOption &&
+        actualCards.keys.last != 99) {
+      progress += 0.10;
+      correctCards[actualCards.keys.last] = (actualCards.values.last);
+    } else if (actualCards.keys.last != 99) {
       switch (location) {
-        case ('Biblioteca'):
-          libraryCards.add(actualCards.removeLast());
+        case ('Library'):
+          libraryCards[actualCards.keys.last] = (actualCards.values.last);
           break;
         case ('Cassandra'):
-          cassandraCards.add(actualCards.removeLast());
-          break;
-        default:
-          actualCards.removeLast();
+          cassandraCards[actualCards.keys.last] = (actualCards.values.last);
           break;
       }
     }
+    actualCards.remove(actualCards.keys.last);
     if (actualCards.isEmpty) {
       switch (location) {
         case ('Cassandra'):
-          actualCards.add(finalCassandraCard);
+          actualCards[-1] = (finalCassandraCard);
           break;
         case ('Library'):
-          actualCards.add(finalLibraryCard);
-          break;
-        default:
-          actualCards.add(finalCassandraCard);
+          actualCards[-1] = (finalLibraryCard);
           break;
       }
     }

@@ -6,10 +6,13 @@ import 'package:lgpd_spread_game/getX/game_controller.dart';
 import 'package:lgpd_spread_game/pages/library_page.dart';
 import 'package:lgpd_spread_game/pages/question_page.dart';
 import 'package:lgpd_spread_game/pages/start_page.dart';
+import 'package:lgpd_spread_game/services/local_data.dart';
 import 'common/tutorial_cards.dart';
 
-void main() {
+void main() async {
+  final store = LocalStorage();
   final gameController = Get.put(GameController());
+  // await store.loadGame(gameController);
   runApp(
     MaterialApp(
       routes: {

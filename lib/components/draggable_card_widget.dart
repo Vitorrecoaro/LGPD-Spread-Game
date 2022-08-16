@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:lgpd_spread_game/getX/game_controller.dart';
+import 'package:lgpd_spread_game/services/local_data.dart';
 
 class DraggableCardWidget extends StatefulWidget {
   final Map<int, String> options;
@@ -66,6 +67,8 @@ class _DraggableCardWidgetState extends State<DraggableCardWidget> {
   updateConcluded(int option) {
     if (option > 0 && option <= 4) {
       ctr.updateCardList(option);
+      final storage = LocalStorage();
+      // storage.saveGame(ctr);
     }
   }
 

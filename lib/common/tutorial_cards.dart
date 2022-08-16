@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:lgpd_spread_game/components/draggable_card_widget.dart';
 
-List<DraggableCardWidget> listTutorialCards = [
-  DraggableCardWidget(
+Map<int, DraggableCardWidget> listTutorialCards = {
+  1: DraggableCardWidget(
     isDraggable: false,
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
@@ -42,7 +42,7 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-  DraggableCardWidget(
+  2: DraggableCardWidget(
     actionShowMap: true,
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
@@ -81,7 +81,7 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-  DraggableCardWidget(
+  3: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'Será como um treinamento, você deverá aprender sobre como proteger os seus aliados e quando ter obtido todo conhecimento volte aqui e será o novo rei do trono da Ruy Company.',
@@ -119,7 +119,7 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-  DraggableCardWidget(
+  4: DraggableCardWidget(
     actionShowProgress: true,
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
@@ -158,7 +158,7 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-  DraggableCardWidget(
+  5: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'Não se incomode! A propósito me chamo Cassandra! Tenho procurado por novos rostos para fazer uma boa proposta, gostaria de ouvi-la?',
@@ -196,7 +196,7 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-  DraggableCardWidget(
+  6: DraggableCardWidget(
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
         'Um rosto desconhecido por estas terras, estás perdido? O que te traz aqui?',
@@ -234,4 +234,4 @@ List<DraggableCardWidget> listTutorialCards = [
       },
     },
   ),
-];
+};
