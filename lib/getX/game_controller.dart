@@ -47,6 +47,7 @@ class GameController extends GetxController {
           break;
       }
       location = loc;
+      showMap = false;
     }
   }
 
@@ -96,6 +97,7 @@ class GameController extends GetxController {
           actualCards[-1] = (finalLibraryCard);
           break;
       }
+      showMap = true;
     }
     update();
   }

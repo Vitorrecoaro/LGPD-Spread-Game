@@ -69,6 +69,7 @@ flutter:
     - lib/assets/UI/LGPD_Spread_Game-Logo.svg
     - lib/assets/UI/library_background.jpg
     - lib/assets/UI/Option.svg
+    - lib/assets/UI/MapImage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

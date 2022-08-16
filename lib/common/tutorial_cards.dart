@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:lgpd_spread_game/components/draggable_card_widget.dart';
 
 Map<int, DraggableCardWidget> listTutorialCards = {
-  1: DraggableCardWidget(
+  -1: DraggableCardWidget(
     isDraggable: false,
     character: 'lib/assets/people/LGPD-Morena.svg',
     question:
@@ -51,8 +51,8 @@ Map<int, DraggableCardWidget> listTutorialCards = {
     options: const {
       1: 'Ótimo!',
       2: 'Perfeito!',
-      3: 'E como eu encontro esta tal de Romana?',
-      4: 'E por onde posso ir a livraria?'
+      3: 'E como posso provar que sou digno?',
+      4: 'Como assim?'
     },
     scoreMap: const {
       1: {

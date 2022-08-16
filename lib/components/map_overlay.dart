@@ -13,83 +13,145 @@ class MapOverlay extends StatelessWidget {
     double sizeH = MediaQuery.of(context).size.height;
     double sizeW = MediaQuery.of(context).size.width;
     return Center(
-        child: Container(
-      width: sizeW * 0.80,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20), bottomRight: Radius.circular(20)),
-        color: Theme.of(context).colorScheme.secondary,
-        boxShadow: [
-          BoxShadow(
-              color: Colors.black.withOpacity(0.50),
-              blurRadius: 4,
-              offset: const Offset(0, 4))
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 16, 14, 16),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Center(
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SvgPicture.asset(
-                    'lib/assets/UI/Option.svg',
-                  ),
-                  const Center(
-                    child: Text(
-                      'Selecione seu destino',
-                      style: TextStyle(fontSize: 24),
+            const Image(image: AssetImage('lib/assets/UI/MapImage.png')),
+            Positioned(
+              left: 70,
+              top: 235,
+              child: TextButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(
+                    Size.fromWidth(
+                      sizeW * 0.45,
                     ),
-                  )
-                ],
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/cassandraHome');
+                },
+                child: Stack(
+                  children: [
+                    Text(
+                      'Tenda da Cassandra',
+                      style: TextStyle(
+                        fontSize: 24,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 1.5
+                          ..color = Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Tenda da Cassandra',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontSize: 24,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).colorScheme.background),
-                fixedSize: MaterialStateProperty.all(
-                  Size.fromWidth(sizeW * 0.65),
+            Positioned(
+              left: 360,
+              top: 165,
+              child: TextButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(
+                    Size.fromWidth(
+                      sizeW * 0.45,
+                    ),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/cassandraHome');
-              },
-              child: Text(
-                'Tenda da Cassandra',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 18,
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/library');
+                },
+                child: Stack(
+                  children: [
+                    Text(
+                      'Biblioteca',
+                      style: TextStyle(
+                        fontSize: 24,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 1.5
+                          ..color = Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Biblioteca',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontSize: 24,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
-            ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).colorScheme.background),
-                fixedSize: MaterialStateProperty.all(
-                  Size.fromWidth(sizeW * 0.65),
+            Positioned(
+              left: 35,
+              top: 100,
+              child: TextButton(
+                style: ButtonStyle(
+                  fixedSize: MaterialStateProperty.all(
+                    Size.fromWidth(
+                      sizeW * 0.45,
+                    ),
+                  ),
                 ),
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/library');
-              },
-              child: Text(
-                'Biblioteca',
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
-                  fontSize: 18,
+                onPressed: () {},
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  alignment: Alignment.center,
+                  children: [
+                    Text(
+                      'Taverna',
+                      style: TextStyle(
+                        fontSize: 24,
+                        foreground: Paint()
+                          ..style = PaintingStyle.stroke
+                          ..strokeWidth = 1.5
+                          ..color = Colors.white,
+                      ),
+                    ),
+                    Text(
+                      'Taverna',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontSize: 24,
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    Positioned(
+                      top: 22,
+                      child: Icon(
+                        Icons.lock_outline,
+                        size: sizeW * 0.075,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Positioned(
+                      top: 20,
+                      child: Icon(
+                        Icons.lock_outline,
+                        size: sizeW * 0.075,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
         ),
       ),
-    ));
+    );
   }
 }
